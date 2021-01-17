@@ -73,7 +73,7 @@ for (qb in qbs){
 df = dplyr::bind_rows(lst)
 colors = nflfastR::teams_colors_logos %>% filter(team_abbr %in% c('DAL','LA','PHI'))
 
-plot %>% ggplot(aes(x=estimate)) +
+df %>% ggplot(aes(x=estimate)) +
   geom_density(aes(fill=QB),alpha=.6)+
   scale_fill_manual(
     values = c(colors$team_color[3],colors$team_color[1],colors$team_color2[2])
