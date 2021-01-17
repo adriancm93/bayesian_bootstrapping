@@ -3,7 +3,7 @@ library(bayesboot)
 library(ggplot2)
 
 # Read and mutate data
-seasons <- 2020
+seasons <- 2016:2020
 pbp_i <- purrr::map_df(seasons, function(x) {
   readRDS(
     url(
@@ -77,9 +77,15 @@ plot %>% ggplot(aes(x=estimate)) +
   geom_density(aes(fill=QB),alpha=.6)+
   scale_fill_manual(
     values = c(colors$team_color[3],colors$team_color[1],colors$team_color2[2])
-  ) + theme_bw() + theme(plot.title = element_text(size=18))+
+  ) + theme_bw() + 
+  theme(
+    plot.title = element_text(size=14),
+    plot.subtitle = element_text(size=13),
+    axis.title.y =element_blank() )+
   labs(
-    title = 'Using Bayesian Bootstrapping to estimate range of probabilities \nfor QB class 2016'
-  )
+    title = 'Bayesian Bootstrapping to estimate range of possible outcomes for QB class of 2016.',
+    subtitle = 'Regular Season. 2016 - 2020. Passing plays only.',
+    x = 'Passing Efficiency'
+  )+ ggsave('plot2.png',height = 4, width = 8)
 
 
